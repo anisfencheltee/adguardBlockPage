@@ -1,0 +1,52 @@
+{
+  "de": {
+    "title": "Sicher zu Hause.",
+    "text": "Dein Heimnetz hat diese Anfrage gefiltert, um Tracking oder unsichere Inhalte zu blockieren. Damit surfst du entspannter.",
+    "btn_back": "Einen Schritt zurück",
+    "btn_dashboard": "Zum Dashboard",
+    "btn_veto": "Fehlalarm? Seite trotzdem freigeben.",
+    "veto_sending": "Sende E-Mail... ✉️",
+    "veto_done": "Admin wurde informiert. ✓",
+    "veto_error": "Fehler beim Senden."
+  },
+  "en": {
+    "title": "Safe at Home.",
+    "text": "Your home network filtered this request to block tracking or unsafe content. Enjoy a cleaner browsing experience.",
+    "btn_back": "Go back",
+    "btn_dashboard": "To Dashboard",
+    "btn_veto": "False alarm? Unblock this page.",
+    "veto_sending": "Sending email... ✉️",
+    "veto_done": "Admin has been notified. ✓",
+    "veto_error": "Error sending request."
+  },
+  "ru": {
+    "title": "Безопасность дома.",
+    "text": "Ваша домашняя сеть отфильтровала этот запрос, чтобы заблокировать трекеры или небезопасный контент.",
+    "btn_back": "Вернуться назад",
+    "btn_dashboard": "В панель управления",
+    "btn_veto": "Ошибка? Разблокировать страницу.",
+    "veto_sending": "Отправка сообщения... ✉️",
+    "veto_done": "Администратор уведомлен. ✓",
+    "veto_error": "Ошибка при отправке."
+  },
+  "es": {
+    "title": "Seguridad en casa.",
+    "text": "Tu red doméstica ha filtrado esta solicitud para bloquear el rastreo o contenido inseguro. Navega con más tranquilidad.",
+    "btn_back": "Dar un paso atrás",
+    "btn_dashboard": "Ir al Panel",
+    "btn_veto": "¿Falsa alarma? Desbloquear esta página.",
+    "veto_sending": "Enviando correo... ✉️",
+    "veto_done": "El administrador ha sido informado. ✓",
+    "veto_error": "Error al enviar."
+  },
+  "fr": {
+    "title": "Sécurité à domicile.",
+    "text": "Votre réseau domestique a filtré cette requête pour bloquer le pistage ou les contenus dangereux. Naviguez l'esprit tranquille.",
+    "btn_back": "Retour",
+    "btn_dashboard": "Tableau de bord",
+    "btn_veto": "Fausse alerte ? Débloquer la page.",
+    "veto_sending": "Envoi du message... ✉️",
+    "veto_done": "L'admin a été informé. ✓",
+    "veto_error": "Erreur lors de l'envoi."
+  }
+}

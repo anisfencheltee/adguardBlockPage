@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d0e12;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #16181d;
+            border: 1px solid #2d333b;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            color: #38bdf8;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .domain-box {
+            background-color: #000;
+            color: #38bdf8;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            border: 1px dashed #2d333b;
+            text-align: center;
+        }
+
+        .footer {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 30px;
+            border-top: 1px solid #2d333b;
+            padding-top: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #38bdf8;
+            color: #0d0e12;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="header">🤖 Mayordomo: Solicitud de Veto</div>
+        <p>Hola Administrador,</p>
+        <p>Un usuario solicita revisar y desbloquear el siguiente dominio:</p>
+        <div class="domain-box">{{domain}}</div>
+        <p>Puedes gestionar esta solicitud directamente en tu panel:</p>
+        <a href="{{dashboard_url}}" class="btn">Abrir Panel de AdGuard</a>
+        <div class="footer">Generado automáticamente por <strong>neinle.int</strong>.</div>
+    </div>
+</body>
+
+</html>

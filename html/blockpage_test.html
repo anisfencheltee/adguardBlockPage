@@ -1,41 +1,35 @@
 <!DOCTYPE html>
-<html lang="de">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sicher zu Hause | neinle.int</title>
+    <title>Security Filter</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <div class="container">
         <div class="icon-area">
-            <img src="./headImageBotCute.png" alt="Sicherheitsfilter" class="status-image">
+            <img src="header.png" alt="Butler Bot" class="status-image">
         </div>
 
         <div class="card-content">
-            <h1>Sicher zu Hause.</h1>
-            <p>Dein Heimnetz hat diese Anfrage gefiltert, um Tracking oder unsichere Inhalte zu blockieren. Damit surfst
-                du entspannter.</p>
+            <h1 id="title">...</h1>
+            <p id="description">...</p>
 
             <div class="domain-box" id="domain">checking_domain...</div>
 
             <div class="details" id="reason">
-                Wird über die AdGuard-API geprüft...
+                Checking status...
             </div>
 
             <div class="btn-group">
-                <button onclick="history.back()" class="btn btn-primary">Einen Schritt zurück</button>
-                <a href="https://home.neinle.int" class="btn btn-secondary">Zum Dashboard</a>
-                <button onclick="requestWhitelist()" class="btn btn-text" id="whitelistBtn">
-                    Fehlalarm? Seite trotzdem freigeben.
-                </button>
+                <button onclick="history.back()" class="btn btn-primary" id="btnBack">...</button>
+                <a href="https://home.neinle.int" class="btn btn-secondary" id="btnDashboard">...</a>
+                <button onclick="requestWhitelist()" class="btn btn-text" id="whitelistBtn">...</button>
             </div>
         </div>
     </div>
 
-   <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>
-
 </html>
