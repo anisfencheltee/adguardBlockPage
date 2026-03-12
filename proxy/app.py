@@ -11,7 +11,7 @@ app = Flask(__name__)
 # --- Configuration from .env ---
 ADGUARD_URL = os.getenv("ADGUARD_URL")
 USER_PASS = os.getenv("ADGUARD_USER_PASS")
-DASHBOARD_URL = os.getenv("ADGUARD_DASHBOARD_URL", "https://home.neinle.int")
+DASHBOARD_URL = os.getenv("ADGUARD_DASHBOARD_URL")
 LANGUAGE = os.getenv("LANGUAGE", "en").lower()
 
 # SMTP Configuration
@@ -21,7 +21,7 @@ SMTP_USER = os.getenv("SMTP_USER")
 SMTP_PASS = os.getenv("SMTP_PASS")
 EMAIL_TO = os.getenv("EMAIL_TO")
 
-DASHBOARD_URL = os.getenv("ADGUARD_DASHBOARD_URL") 
+HOME_DASHBOARD_URL = os.getenv("HOME_DASHBOARD_URL") 
 
 # --- Endpoint 1: Configuration for Frontend ---
 
@@ -30,7 +30,7 @@ def get_config():
     """Returns language and dashboard configuration to the frontend."""
     return jsonify({
         "lang": LANGUAGE,
-        "dashboard_url": DASHBOARD_URL  # Can be None if not set in .env
+        "dashboard_url": HOME_DASHBOARD_URL  # Can be None if not set in .env
     })
 
 
