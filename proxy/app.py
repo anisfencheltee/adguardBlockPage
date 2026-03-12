@@ -12,7 +12,7 @@ app = Flask(__name__)
 ADGUARD_URL = os.getenv("ADGUARD_URL")
 USER_PASS = os.getenv("ADGUARD_USER_PASS")
 DASHBOARD_URL = os.getenv("ADGUARD_DASHBOARD_URL", "https://home.neinle.int")
-LANGUAGE = os.getenv("LANGUAGE", "de").lower()
+LANGUAGE = os.getenv("LANGUAGE", "en").lower()
 
 # SMTP Configuration
 SMTP_SERVER = os.getenv("SMTP_SERVER")

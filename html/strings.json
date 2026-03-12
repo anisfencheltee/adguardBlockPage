@@ -7,7 +7,12 @@
     "btn_veto": "Fehlalarm? Seite trotzdem freigeben.",
     "veto_sending": "Sende E-Mail... ✉️",
     "veto_done": "Admin wurde informiert. ✓",
-    "veto_error": "Fehler beim Senden."
+    "veto_error": "Fehler beim Senden.",
+    "unknown_request": "Unbekannte Anfrage",
+    "automated_filter": "Automatischer Sicherheitsfilter",
+    "filtered_by": "Gefiltert durch",
+    "offline_mode": "Offline-Modus",
+    "api_error": "Verbindung zum API-Proxy fehlgeschlagen."
   },
   "en": {
     "title": "Safe at Home.",
@@ -17,7 +22,12 @@
     "btn_veto": "False alarm? Unblock this page.",
     "veto_sending": "Sending email... ✉️",
     "veto_done": "Admin has been notified. ✓",
-    "veto_error": "Error sending request."
+    "veto_error": "Error sending request.",
+    "unknown_request": "Unknown request",
+    "automated_filter": "Automated security filter",
+    "filtered_by": "Filtered by",
+    "offline_mode": "Offline mode",
+    "api_error": "Could not connect to the API proxy."
   },
   "ru": {
     "title": "Безопасность дома.",
@@ -27,7 +37,12 @@
     "btn_veto": "Ошибка? Разблокировать страницу.",
     "veto_sending": "Отправка сообщения... ✉️",
     "veto_done": "Администратор уведомлен. ✓",
-    "veto_error": "Ошибка при отправке."
+    "veto_error": "Ошибка при отправке.",
+    "unknown_request": "Неизвестный запрос",
+    "automated_filter": "Автоматический фильтр безопасности",
+    "filtered_by": "Фильтр:",
+    "offline_mode": "Автономный режим",
+    "api_error": "Не удалось подключиться к API-прокси."
   },
   "es": {
     "title": "Seguridad en casa.",
@@ -37,7 +52,12 @@
     "btn_veto": "¿Falsa alarma? Desbloquear esta página.",
     "veto_sending": "Enviando correo... ✉️",
     "veto_done": "El administrador ha sido informado. ✓",
-    "veto_error": "Error al enviar."
+    "veto_error": "Error al enviar.",
+    "unknown_request": "Solicitud desconocida",
+    "automated_filter": "Filtro de seguridad automático",
+    "filtered_by": "Filtrado por",
+    "offline_mode": "Modo offline",
+    "api_error": "No se pudo conectar con el proxy de la API."
   },
   "fr": {
     "title": "Sécurité à domicile.",
@@ -47,6 +67,11 @@
     "btn_veto": "Fausse alerte ? Débloquer la page.",
     "veto_sending": "Envoi du message... ✉️",
     "veto_done": "L'admin a été informé. ✓",
-    "veto_error": "Erreur lors de l'envoi."
+    "veto_error": "Erreur lors de l'envoi.",
+    "unknown_request": "Requête inconnue",
+    "automated_filter": "Filtre de sécurité automatique",
+    "filtered_by": "Filtré par",
+    "offline_mode": "Mode hors-ligne",
+    "api_error": "Échec de la connexion au proxy API."
   }
 }
