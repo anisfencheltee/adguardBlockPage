@@ -14,7 +14,7 @@ async function init() {
         const configRes = await fetch('/api/config');
         const config = await configRes.json();
         currentLang = config.lang;
-
+        console.log(currentLang);
         // 2. Load strings file
         const stringsRes = await fetch('strings.json');
         const allStrings = await stringsRes.json();
@@ -51,7 +51,6 @@ async function init() {
         console.error("i18n initialization failed:", error);
     }
 }
-
 /**
  * Fetch the blocked domain info from AdGuard via Proxy
  */
@@ -65,11 +64,17 @@ async function fetchBlockData() {
         
         if (data.error) throw new Error(data.error);
         
-        domainEl.innerText = data.domain || "unknown_request";
-        reasonEl.innerText = data.filter ? `Filtered by: ${data.filter}` : "Automated security filter";
+        domainEl.innerText = data.domain || strings.unknown_request;
+        
+        // Dynamischer Grund mit Fallback auf den Standard-Grund aus der JSON
+        reasonEl.innerText = data.filter 
+            ? `${strings.filtered_by || 'Filtered by'}: ${data.filter}` 
+            : strings.automated_filter;
+
     } catch (error) {
-        domainEl.innerText = "offline_mode";
-        reasonEl.innerText = "Could not connect to the API proxy.";
+        // Fehler-Texte aus der strings.json
+        domainEl.innerText = strings.offline_mode || "Offline";
+        reasonEl.innerText = strings.api_error || "Could not connect to the API proxy.";
     }
 }
 
