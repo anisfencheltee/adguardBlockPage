@@ -1,151 +1,13 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sicher zu Hause | neinle.int</title>
-    <style>
-        :root {
-            --bg: #0d0e12;
-            --card: #16181d;
-            --text: #e2e8f0;
-            --accent: #94a3b8;
-            --highlight: #38bdf8;
-            --border: #2d333b;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            /* Sorgt dafür, dass genug Platz für den Überhang ist */
-            padding-top: 50px; 
-        }
-
-        .container {
-            background: var(--card);
-            /* Mehr Padding unten, damit es ausbalanciert ist */
-            padding: 0 2.5rem 3rem 2.5rem; 
-            border-radius: 20px;
-            width: 100%;
-            max-width: 420px;
-            text-align: center;
-            border: 1px solid var(--border);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            /* WICHTIG: Damit wir das Bild relativ positionieren können */
-            position: relative; 
-            /* Sorgt dafür, dass alles *außer* dem Überhang innerhalb bleibt */
-            overflow: visible; 
-        }
-
-        /* Neue Container-Klasse für den Überhang */
-        .icon-area {
-            position: absolute;
-            top: -65px; /* Die Hälfte der Höhe + ein bisschen Rand */
-            left: 50%;
-            transform: translateX(-50%); /* Zentriert es exakt */
-            z-index: 10; /* Setzt es *über* den Border der Karte */
-        }
-
-        .status-image {
-            /* Das Bild ist jetzt 130px statt 80px/100px */
-            width: 130px; 
-            height: 130px;
-            border-radius: 50%;
-            object-fit: cover;
-            /* Der Border gehört jetzt zum Bild, nicht zur Karte */
-            border: 4px solid var(--border); 
-            /* Ein starker Schatten, der den Überhang betont */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7); 
-            background: var(--card); /* Verhindert, dass man durchschaut */
-        }
-
-        /* Wir müssen den Content der Karte nach unten schieben */
-        .card-content {
-            padding-top: 100px; 
-        }
-
-        h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin: 0 0 0.5rem 0;
-            color: var(--text);
-            letter-spacing: -0.02em;
-        }
-
-        p {
-            color: var(--accent);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .domain-box {
-            background: #000;
-            padding: 0.8rem;
-            border-radius: 10px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
-            border: 1px solid var(--border);
-            margin-bottom: 1.5rem;
-            color: var(--highlight);
-        }
-
-        .details {
-            font-size: 0.75rem;
-            color: var(--accent);
-            margin-bottom: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .btn {
-            padding: 0.85rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--highlight);
-            color: #000;
-        }
-
-        .btn-secondary {
-            background: var(--border);
-            color: var(--text);
-        }
-
-        .btn-text {
-            background: transparent;
-            color: var(--accent);
-            font-size: 0.8rem;
-            margin-top: 10px;
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
-
-        .btn:hover {
-            filter: brightness(1.1);
-            transform: translateY(-1px);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <div class="icon-area">
@@ -154,7 +16,8 @@
 
         <div class="card-content">
             <h1>Sicher zu Hause.</h1>
-            <p>Dein Heimnetz hat diese Anfrage gefiltert, um Tracking oder unsichere Inhalte zu blockieren. Damit surfst du entspannter.</p>
+            <p>Dein Heimnetz hat diese Anfrage gefiltert, um Tracking oder unsichere Inhalte zu blockieren. Damit surfst
+                du entspannter.</p>
 
             <div class="domain-box" id="domain">checking_domain...</div>
 
@@ -172,26 +35,7 @@
         </div>
     </div>
 
-    <script>
-        async function fetchStatus() {
-            try {
-                const r = await fetch('/api/last-block');
-                const d = await r.json();
-                document.getElementById('domain').innerText = d.domain || "unbekannte_anfrage";
-                document.getElementById('reason').innerText = d.filter ? `Gefiltert durch: ${d.filter}` : "Automatische Sicherheitsfilterung";
-            } catch (e) {
-                document.getElementById('domain').innerText = "offline_mode";
-                document.getElementById('reason').innerText = "Verbindung zum API-Proxy fehlgeschlagen.";
-            }
-        }
-        fetchStatus();
-
-        function requestWhitelist() {
-            const btn = document.getElementById('whitelistBtn');
-            btn.innerText = "Anfrage an den Admin gesendet. ✓";
-            btn.style.color = "#38bdf8";
-            btn.disabled = true;
-        }
-    </script>
+   <script src="scripts.js"></script>
 </body>
+
 </html>
