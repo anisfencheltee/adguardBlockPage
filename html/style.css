@@ -1,16 +1,33 @@
+/* Standard: Light Mode */
 :root {
-    --bg: #0d0e12;
-    --card: #16181d;
-    --text: #e2e8f0;
-    --accent: #94a3b8;
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --container-bg: #f4f4f4;
+    --accent-color: #007bff;
+    --domain-field-color: #eee;
     --highlight: #38bdf8;
-    --border: #2d333b;
+    --border: #ddd;
 }
 
+/* Automatisch: Dark Mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #f5f5f5;
+        --container-bg: #2d2d2d;
+        --accent-color: #3793ff;
+        --domain-field-color: #000;
+        --highlight: #38bdf8;
+        --border: #2d333b;
+    }
+}
+
+/* Anwendung in deinem Stylesheet */
 body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s; /* Macht den Wechsel geschmeidig */
     font-family: 'Inter', -apple-system, sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,6 +38,7 @@ body {
 }
 
 .container {
+    background-color: var(--container-bg);
     background: var(--card);
     /* Mehr Padding unten, damit es ausbalanciert ist */
     padding: 0 2.5rem 3rem 2.5rem;
@@ -83,7 +101,7 @@ p {
 }
 
 .domain-box {
-    background: #000;
+    background: var(--domain-field-color);
     padding: 0.8rem;
     border-radius: 10px;
     font-family: 'Fira Code', monospace;
