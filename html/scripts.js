@@ -26,8 +26,7 @@ async function init() {
         document.getElementById('title').innerText = strings.title;
         document.getElementById('description').innerText = strings.text;
         document.getElementById('btnBack').innerText = strings.btn_back;
-        document.getElementById('btnDashboard').innerText = strings.btn_dashboard;
-        document.getElementById('whitelistBtn').innerText = strings.btn_veto;
+        document.getElementById('btnDashboard').innerText = strings.btn_dashboard;        
 
         // 4. Fetch the actual block data
         fetchBlockData();
@@ -73,39 +72,10 @@ async function fetchBlockData() {
 
     } catch (error) {
         // Fehler-Texte aus der strings.json
+        console.log(error);
         domainEl.innerText = strings.offline_mode || "Offline";
         reasonEl.innerText = strings.api_error || "Could not connect to the API proxy.";
     }
 }
 
-/**
- * Send Whitelist/Veto request via Email
- */
-async function requestWhitelist() {
-    const btn = document.getElementById('whitelistBtn');
-    const domain = document.getElementById('domain').innerText;
-
-    btn.innerText = strings.veto_sending;
-    btn.disabled = true;
-
-    try {
-        const response = await fetch('/api/whitelist', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ domain: domain })
-        });
-
-        if (response.ok) {
-            btn.innerText = strings.veto_done;
-            btn.style.color = "#38bdf8";
-        } else {
-            throw new Error();
-        }
-    } catch (error) {
-        btn.innerText = strings.veto_error;
-        btn.disabled = false;
-    }
-}
-
-// Start the engine
 init();
