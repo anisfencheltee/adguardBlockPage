@@ -40,7 +40,7 @@ def fetch_filter_names():
         data = response.json()
         
         # Mappt ID auf den Klarnamen
-        filter_name_map[0] = 'custom';
+        filter_name_map["0"] = 'custom';
         for filter_list in data.get('filters', []):
             filter_name_map[str(filter_list['id'])] = filter_list['name']
         logging.info(f"✅ {len(filter_name_map)} Filternamen von AdGuard geladen.")
