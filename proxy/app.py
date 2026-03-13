@@ -13,6 +13,10 @@ USER_PASS = os.getenv("ADGUARD_USER_PASS")
 LANGUAGE = os.getenv("LANGUAGE", "en").lower()
 HOME_DASHBOARD_URL = os.getenv("HOME_DASHBOARD_URL") 
 
+# In der .env als kommagetrennte Liste: SKIP_DOMAINS=neinle.int,pi.local,localhost
+SKIP_DOMAINS_RAW = os.getenv("SKIP_DOMAINS", "")
+SKIP_DOMAINS = [d.strip() for d in SKIP_DOMAINS_RAW.split(",") if d.strip()]
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -32,46 +36,49 @@ def get_config():
 # --- Endpoint 2: Fetch last block from AdGuard ---
 @app.route('/last-block')
 def get_last_block():
-    """Queries the AdGuard API for the most recent filtered entry of the specific requester."""
+    """Queries the AdGuard API and skips internal domains from .env."""
     if not ADGUARD_URL or not USER_PASS:
         return jsonify({"error": "Configuration missing"}), 500
 
-    # 1. Die IP des Gastes ermitteln (damit er nicht den Block von jemand anderem sieht)
     guest_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
-    guest_ip = guest_ip.split(',')[0].strip() # Falls mehrere IPs im Header sind
+    guest_ip = guest_ip.split(',')[0].strip()
     
-    # 2. Deine funktionierende Authentifizierung
     auth_header = {"Authorization": f"Basic {base64.b64encode(USER_PASS.encode()).decode()}"}
     
-    # 3. Suche gezielt nach der IP des Gastes
+    # Wir erhöhen das Limit etwas, um genug Puffer für die Skip-Liste zu haben
     query_params = {
-        "limit": 1, 
+        "limit": 10, 
         "response_status": "filtered",
-        "search": guest_ip  # Filtert das Log nach der IP des Besuchers
+        "search": guest_ip
     }
-    
-    logging.info(f"Frage AdGuard nach letztem Block für IP: {guest_ip}")
 
     try:
         response = requests.get(ADGUARD_URL, headers=auth_header, params=query_params, timeout=5)
         response.raise_for_status()
         data = response.json()
         
-        if data.get('data') and len(data['data']) > 0:
-            entry = data['data'][0]
-            logging.info(f"✅ Block für {guest_ip} gefunden: {entry['question']['name']}")
-            return jsonify({
-                "domain": entry['question']['name'],
-                "filter": entry.get('filter_id', 'System Default'),
-                "reason": entry.get('reason', 'Blocked')
-            })
+        if data.get('data'):
+            target_entry = None
+            for entry in data['data']:
+                domain = entry['question']['name']
+                
+                # Prüfen, ob die Domain eine der Skip-Listen-Einträge enthält
+                should_skip = any(skip_d in domain for skip_d in SKIP_DOMAINS)
+                
+                if not should_skip:
+                    target_entry = entry
+                    break
+            
+            if target_entry:
+                logging.info(f"✅ Relevanter Block gefunden: {target_entry['question']['name']}")
+                return jsonify({
+                    "domain": target_entry['question']['name'],
+                    "filter": target_entry.get('filter_id', 'System Default'),
+                    "reason": target_entry.get('reason', 'Blocked')
+                })
+                
     except Exception as e:
-        # Falls response existiert, loggen wir Details, sonst nur den Fehler
-        status = getattr(response, 'status_code', 'No Response')
-        text = getattr(response, 'text', 'No Text')
-        logging.error(f"❌ Fehler: Status Code {status}")
-        logging.error(f"Antwort vom Server: {text}")
-        logging.error(e)
+        logging.error(f"❌ Fehler bei API Abfrage: {e}")
         return jsonify({"error": "Failed to connect to AdGuard API"}), 500
         
     return jsonify({"domain": "No recent block found"})
