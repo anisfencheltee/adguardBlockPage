@@ -70,7 +70,7 @@ async function fetchBlockData() {
             ? `${strings.filtered_by || 'Filtered by'}: ${filter}` 
             : strings.automated_filter;
 
-        reasonEl.innerText += '; Rule:' + data.rule
+        reasonEl.innerText += '<br>Rule:' + data.rule
     } catch (error) {
         // Fehler-Texte aus der strings.json
         console.log(error);
