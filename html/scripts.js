@@ -64,6 +64,7 @@ async function fetchBlockData() {
         if (data.error) throw new Error(data.error);
         
         domainEl.innerText = data.domain || strings.unknown_request;
+        console.log(data);
         let filter = data.filter ==='custom'?strings.custom_filter:data.filter;
         // Dynamischer Grund mit Fallback auf den Standard-Grund aus der JSON
         reasonEl.innerText = filter 
