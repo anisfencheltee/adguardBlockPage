@@ -14,13 +14,6 @@ USER_PASS = os.getenv("ADGUARD_USER_PASS")
 DASHBOARD_URL = os.getenv("ADGUARD_DASHBOARD_URL")
 LANGUAGE = os.getenv("LANGUAGE", "en").lower()
 
-# SMTP Configuration
-SMTP_SERVER = os.getenv("SMTP_SERVER")
-SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
-SMTP_USER = os.getenv("SMTP_USER")
-SMTP_PASS = os.getenv("SMTP_PASS")
-EMAIL_TO = os.getenv("EMAIL_TO")
-
 HOME_DASHBOARD_URL = os.getenv("HOME_DASHBOARD_URL") 
 
 # --- Endpoint 1: Configuration for Frontend ---
@@ -60,55 +53,6 @@ def get_last_block():
         
     return jsonify({"domain": "No recent block found"})
 
-# --- Endpoint 3: Send Veto/Whitelist Email ---
-@app.route('/whitelist', methods=['POST'])
-def send_whitelist_request():
-    """Sends an email notification when a user requests a whitelist entry."""
-    payload = request.json
-    domain = payload.get('domain', 'Unknown')
-    
-    # 1. Determine template path based on language
-    template_filename = f"{LANGUAGE}.html"
-    template_path = os.path.join(os.path.dirname(__file__), 'email_templates', template_filename)
-    
-    # Fallback to 'de' if the specific language template is missing
-    if not os.path.exists(template_path):
-        template_path = os.path.join(os.path.dirname(__file__), 'email_templates', 'de.html')
-
-    # 2. Load HTML template and replace placeholders
-    try:
-        with open(template_path, 'r', encoding='utf-8') as file:
-            html_content = file.read()
-        
-        html_content = html_content.replace('{{domain}}', domain)
-        html_content = html_content.replace('{{dashboard_url}}', DASHBOARD_URL)
-    except Exception as e:
-        return jsonify({"error": "Template loading failed"}), 500
-
-    # 3. Send Email
-    try:
-        subjects = {
-            "de": f"🚨 Veto-Anfrage: {domain}",
-            "en": f"🚨 Whitelist Request: {domain}",
-            "ru": f"🚨 Запрос на разблокировку: {domain}",
-            "es": f"🚨 Solicitud de lista blanca: {domain}",
-            "fr": f"🚨 Demande de liste blanche : {domain}"
-        }
-        
-        msg = MIMEMultipart("alternative")
-        msg['Subject'] = subjects.get(LANGUAGE, f"Whitelist Request: {domain}")
-        msg['From'] = SMTP_USER
-        msg['To'] = EMAIL_TO
-        msg.attach(MIMEText(html_content, "html"))
-
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()
-            server.login(SMTP_USER, SMTP_PASS)
-            server.send_message(msg)
-            
-        return jsonify({"status": "success"}), 200
-    except Exception as e:
-        return jsonify({"error": "SMTP delivery failed"}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
